@@ -4,23 +4,22 @@ int	pxl_put_ju(t_fract *fr)
 {
 	long int i;
 
-	i = fr->y * 1600 * 4 + fr->x * 4;
-	fr->pxl[i + 1] = fr->i % 255;
+	if (fr->psycho == 1)
+	{
+		i = fr->y * 1600 * 4 + fr->x * 4;
+		fr->pxl[i] = fr->i * fr->b * fr->color;				//blue
+		fr->pxl[i + 1] = fr->i * fr->g * fr->color;			//green
+		fr->pxl[i + 2] = fr->i * fr->r * fr->color;			//red
+	}
+	else
+	{
+		i = fr->y * 1600 * 4 + fr->x * 4;
+		fr->pxl[i] = fr->i % fr->b * fr->color;				//blue
+		fr->pxl[i + 1] = fr->i % fr->g * fr->color;			//green
+		fr->pxl[i + 2] = fr->i % fr->r * fr->color;			//red
+	}
 	return (0);
 }
-
-void		initiate_julia(t_fract *fr)
-{
-	int		bpp;
-	int		line;
-	int		ed;
-
-	fr->win = mlx_new_window(fr->mlx, SCR_W, SCR_H, "Julia Set");
-	fr->pxl = mlx_get_data_addr(fr->img, &bpp, &line, &ed);
-	fr->c_re = -0.7;
-	fr->c_im = 0.27015;
-}
-
 void	print_pixel(t_fract *fr)
 {
 	fr->i = 0;
@@ -28,8 +27,8 @@ void	print_pixel(t_fract *fr)
 	{
 		fr->old_re = fr->new_re;
 		fr->old_im = fr->new_im;
-		fr->new_re = fr->old_re * fr->old_re - fr->old_im * fr->old_im + fr->c_re;
-		fr->new_im = 2 * fr->old_re * fr->old_im + fr->c_im;
+		fr->new_re = fr->old_re * fr->old_re - fr->old_im * fr->old_im + fr->c_re + fr->x_move;
+		fr->new_im = 2 * fr->old_re * fr->old_im + fr->c_im + fr->y_move;
 		if((fr->new_re * fr->new_re + fr->new_im * fr->new_im) > 4) 
 			break;
 		fr->i++;
@@ -38,9 +37,10 @@ void	print_pixel(t_fract *fr)
 		pxl_put_ju(fr);
 }
 
-int			julia_set(t_fract *fr)
+void			julia_set(t_fract *fr)
 {
-	initiate_julia(fr);
+	fr->c_re = -0.7;
+	fr->c_im = 0.27015;
 	fr->y = 0;
 	while (fr->y < SCR_H)
 	{
@@ -54,9 +54,4 @@ int			julia_set(t_fract *fr)
 		}
 		fr->y++;
 	}
-	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
-	mlx_key_hook(fr->win, my_key_funct, 0);
-	mlx_hook(fr->win, 17, 0L, ft_mouse_hook, 0);
-	mlx_loop(fr->mlx);
-	return (0);
 }

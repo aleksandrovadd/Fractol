@@ -17,7 +17,7 @@ FLAGS_MLX = -lmlx -framework OpenGL -framework AppKit
 
 NAME = fractol
 
-SRC = fractol.c julia_set.c mandelbrot_set.c
+SRC = fractol.c julia_set.c mandelbrot_set.c second.c movement.c
 
 LIB = libft/libft.a
 LIBPRINT = ft_printf/libftprintf.a
@@ -48,3 +48,14 @@ fclean: clean
 	@echo "\033[31m<<Deleted fractol>>\033[31m"
 
 re: clean all
+
+# int        julia_hook(int x, int y, t_one *f)
+# {
+#     if ((x >= 0 && x <= WI && y >= 0 && y <= HI) && (!f->pause))
+#     {
+#         f->rot_y = y * (2.0 / HI) - 1.0;
+#         f->rot_x = x * (2.0 / WI) - 1.0;
+#         redraw(f);
+#     }
+#     return (0);
+# }
