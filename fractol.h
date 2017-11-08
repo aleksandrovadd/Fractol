@@ -1,31 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daleksan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/08 19:35:02 by daleksan          #+#    #+#             */
+/*   Updated: 2017/11/08 19:37:05 by daleksan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include <math.h>
 # include "mlx.h"
 # include "libft/libft.h"
 # include "ft_printf/src/ft_printf.h"
-# include "get_next_line.h"
-# define SCR_W 1600
-# define SCR_H 1200
-# define UP_KEY 126		//up
-# define R_KEY 124		//right
-# define D_KEY 125		//down
-# define L_KEY 123		//left
+# define SCR_W 1200
+# define SCR_H 800
+# define UP_KEY 126
+# define R_KEY 124
+# define D_KEY 125
+# define L_KEY 123
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
 
-typedef struct 		s_fract
+typedef struct		s_fract
 {
 	void			*mlx;
 	void			*win;
-	void  			*img;
+	void			*img;
 	char			*pxl;
 	int				color;
-	int 			max_iter;
+	int				max_iter;
 	int				num;
 	int				psycho;
+	int				blue;
 
-	double			c_re; 
+	double			c_re;
 	double			c_im;
 	double			new_re;
 	double			new_im;
@@ -54,13 +66,15 @@ typedef struct 		s_fract
 
 void				mandelbrot_set(t_fract *fr);
 void				julia_set(t_fract *fr);
-int 				ft_mouse_hook(void);
-int 				key_hook(int key, t_fract *fr);
+int					ft_mouse_hook(void);
+int					key_hook(int key, t_fract *fr);
 int					change_col(t_fract *fr);
 int					init_col(t_fract *fr);
-int 				mouse_movement(int x, int y, t_fract *fr);
+int					mouse_movement(int x, int y, t_fract *fr);
 int					mouse_funct(int button, int x, int y, t_fract *fr);
-void	            redraw(t_fract *fr);
-int 				mouse_movement(int x, int y, t_fract *fr);
+void				redraw(t_fract *fr);
+void				burningship_set(t_fract *fr);
+int					pxl_put(t_fract *fr);
+void				usage(void);
 
 #endif
