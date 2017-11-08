@@ -21,6 +21,7 @@ int		mouse_funct(int button, int x, int y, t_fract *fr)
 		fr->move_y += (y - SCR_H / 2) / (SCR_H * 2.5) / fr->zoom;
 	}
 	(button == 5) ? fr->zoom /= 1.1 : 0;
+	(button == 1) ? fr->move = 0 : 0;
 	redraw(fr);
 	return (0);
 }
@@ -29,7 +30,7 @@ int		mouse_movement(int x, int y, t_fract *fr)
 {
 	if (fr->move == 1)
 	{
-		fr->x_move = (x - 0) * (1.0 - (-1.0)) / (1200 - 0) + (-1);
+		fr->x_move = (x - 0) * (1.3 - (-1.3)) / (1200 - 0) + (-1.3);
 		fr->y_move = (y - 0) * (0.2 - (-0.2)) / (800 - 0) + (-0.2);
 		redraw(fr);
 	}
@@ -43,17 +44,17 @@ int		ft_mouse_hook(void)
 
 int		change_col(t_fract *fr)
 {
-	if (fr->color == 2 && (fr->r > 10 && fr->r < 245))
+	if (fr->color == 2 && (fr->r >= 1 && fr->r < 245))
 		fr->r += 10;
-	else
+	if (fr->color == 5 && (fr->r > 10 && fr->r < 245))
 		fr->r -= 10;
-	if (fr->color == 3 && (fr->g > 10 && fr->g < 245))
+	if (fr->color == 3 && (fr->g >= 1 && fr->g < 245))
 		fr->g += 10;
-	else
+	if (fr->color == 6 && (fr->g > 10 && fr->g < 245))
 		fr->g -= 10;
-	if (fr->color == 4 && (fr->b > 10 && fr->b < 245))
+	if (fr->color == 4 && (fr->b >= 1 && fr->b < 245))
 		fr->b += 10;
-	else
+	if (fr->color == 7 && (fr->b > 10 && fr->b < 245))
 		fr->b -= 10;
 	return (0);
 }
@@ -74,8 +75,12 @@ int		key_hook(int key, t_fract *fr)
 	(key == 83) ? ((fr->color = 2) && (change_col(fr))) : 0;
 	(key == 84) ? ((fr->color = 3) && (change_col(fr))) : 0;
 	(key == 85) ? ((fr->color = 4) && (change_col(fr))) : 0;
+	(key == 86) ? ((fr->color = 5) && (change_col(fr))) : 0;
+	(key == 87) ? ((fr->color = 6) && (change_col(fr))) : 0;
+	(key == 88) ? ((fr->color = 7) && (change_col(fr))) : 0;
 	(key == 82) ? ((fr->color = 1) && (init_col(fr))) : 0;
 	(key == 82) ? fr->psycho = 0 : 0;
+	// printf("r: %d  g: %d  b:  %d \n", fr->r, fr->g, fr->b);
 	redraw(fr);
 	return (0);
 }
