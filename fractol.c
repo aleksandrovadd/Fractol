@@ -25,7 +25,9 @@ int			init_col(t_fract *fr)
 	fr->move_y = 0;
 	fr->pause = 0;
 	fr->move = 0;
-	fr->blue = 0;
+	fr->nice = 0;
+	fr->x_move = 0;
+	fr->y_move = 0;
 	return (0);
 }
 
@@ -34,7 +36,7 @@ int			menu(int i)
 	ft_printf("Menu:\n");
 	ft_printf("1 - Julia Set\n");
 	ft_printf("2 - Mandelbrot Set\n");
-	ft_printf("3 - Birningship Set\n");
+	ft_printf("3 - Burningship Set\n");
 	ft_printf("Usage: ./fractol [Set number]\n");
 	exit(i);
 }
@@ -85,6 +87,7 @@ int			main(int ac, char **av)
 
 	if (ac < 2 || ac > 2)
 		menu(0);
+	check_parametr(av[1]);
 	fr = (t_fract *)malloc(sizeof(t_fract));
 	init_fr(av[1], fr);
 	return (0);

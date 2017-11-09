@@ -6,7 +6,7 @@
 /*   By: daleksan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 19:35:02 by daleksan          #+#    #+#             */
-/*   Updated: 2017/11/08 19:37:05 by daleksan         ###   ########.fr       */
+/*   Updated: 2017/11/09 18:35:15 by daleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct		s_fract
 	int				max_iter;
 	int				num;
 	int				psycho;
-	int				blue;
+	int				nice;
 
 	double			c_re;
 	double			c_im;
@@ -65,7 +65,9 @@ typedef struct		s_fract
 }					t_fract;
 
 void				mandelbrot_set(t_fract *fr);
+int					pxlput_mandel(t_fract *fr);
 void				julia_set(t_fract *fr);
+int					pxlput_jul(t_fract *fr);
 int					ft_mouse_hook(void);
 int					key_hook(int key, t_fract *fr);
 int					change_col(t_fract *fr);
@@ -74,7 +76,10 @@ int					mouse_movement(int x, int y, t_fract *fr);
 int					mouse_funct(int button, int x, int y, t_fract *fr);
 void				redraw(t_fract *fr);
 void				burningship_set(t_fract *fr);
+int					pxlput_burn(t_fract *fr);
 int					pxl_put(t_fract *fr);
 void				usage(void);
+int					menu(int i);
+int					check_parametr(char *str);
 
 #endif

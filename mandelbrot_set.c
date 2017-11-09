@@ -6,22 +6,31 @@
 /*   By: daleksan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 19:39:41 by daleksan          #+#    #+#             */
-/*   Updated: 2017/11/08 19:41:21 by daleksan         ###   ########.fr       */
+/*   Updated: 2017/11/09 18:07:59 by daleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	print_mandel_pixel(t_fract *fr)
+int				pxlput_mandel(t_fract *fr)
+{
+	long int	i;
+
+	i = fr->y * SCR_W * 4 + fr->x * 4;
+	fr->pxl[i + 1] = fr->i * 4 % 255 * fr->color;
+	return (0);
+}
+
+void			print_mandel_pixel(t_fract *fr)
 {
 	fr->i = 0;
 	while (fr->i < fr->max_iter)
 	{
-		fr->old_re = fr->new_re;
-		fr->old_im = fr->new_im;
+		fr->old_re = fr->new_re + fr->x_move / 3;
+		fr->old_im = fr->new_im + fr->y_move * 3;
 		fr->new_re = fr->old_re * fr->old_re - fr->old_im * fr->old_im
-		+ fr->c_re + fr->x_move;
-		fr->new_im = 2 * fr->old_re * fr->old_im + fr->c_im + fr->y_move;
+		+ fr->c_re;
+		fr->new_im = 2 * fr->old_re * fr->old_im + fr->c_im;
 		if ((fr->new_re * fr->new_re + fr->new_im * fr->new_im) > 4)
 			break ;
 		fr->i++;
@@ -30,7 +39,7 @@ void	print_mandel_pixel(t_fract *fr)
 		pxl_put(fr);
 }
 
-void	mandelbrot_set(t_fract *fr)
+void			mandelbrot_set(t_fract *fr)
 {
 	fr->y = 0;
 	while (fr->y < SCR_H)
