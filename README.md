@@ -7,5 +7,5 @@ pattern whatever the scale.
 Julia_Set
 <img src="https://github.com/aleksandrovadd/Fractol/blob/master/Julia_3.png"/>
 
-![]https://github.com/aleksandrovadd/Fractol/blob/master/Julia_4.png
+<img src="https://github.com/aleksandrovadd/Fractol/blob/master/Julia_4.png"/>
 
