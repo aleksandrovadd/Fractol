@@ -47,4 +47,4 @@ fclean: clean
 	@rm -rf $(NAME)
 	@echo "\033[31m<<Deleted fractol>>\033[31m"
 
-re: fclean all
+re: clean all
