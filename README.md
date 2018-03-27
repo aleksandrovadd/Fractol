@@ -9,3 +9,5 @@ Julia_Set
 
 <img src="https://github.com/aleksandrovadd/Fractol/blob/master/Julia_4.png"/>
 
+Mandelbrot_Set
+<img src="https://github.com/aleksandrovadd/Fractol/blob/master/Mandelbrot_2.jpg"/>
